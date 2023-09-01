@@ -54,16 +54,17 @@
 
       <div class="bground">
         <div class="content">
-          <span class="close"></span>
+          <r class="close"></r>
           <div class="modal-body">
             <form
               name="reserve"
               action="index.html"
               method="get"
               onsubmit="return validate();"
+              id="form"
             >
               <div
-                class="formData">
+                class="formData" id="firstData">
                 <label>Prénom</label><br>
                 <input
                   class="text-control"
@@ -71,10 +72,11 @@
                   id="first"
                   name="first"
                   minlength="2"
-                /><br>
+                /> <br>
+               
               </div>
               <div
-                class="formData">
+                class="formData" id="lastData">
                 <label>Nom</label><br>
                 <input
                   class="text-control"
@@ -84,7 +86,7 @@
                 /><br>
               </div>
               <div
-                class="formData">
+                class="formData" id="emailData">
                 <label>E-mail</label><br>
                 <input
                   class="text-control"
@@ -94,7 +96,7 @@
                 /><br>
               </div>
               <div
-                class="formData">
+                class="formData" id="birthData">
                 <label>Date de naissance</label><br>
                 <input
                   class="text-control"
@@ -104,13 +106,13 @@
                 /><br>
               </div>
               <div
-                class="formData">
+                class="formData" id="quantityData">
                 <label>À combien de tournois GameOn avez-vous déjà participé ?</label><br>
                 <input type="number" class="text-control" id="quantity" name="quantity" min="0" max="99">
               </div>
               <p class="text-label">A quel tournoi souhaitez-vous participer cette année ?</p>
               <div
-                class="formData">
+                class="formData" id="radioData">
                 <input
                   class="checkbox-input"
                   type="radio"
@@ -180,7 +182,7 @@
               </div>
 
               <div
-                class="formData">
+                class="formData" id="checkboxData">
                 <input
                   class="checkbox-input"
                   type="checkbox"
