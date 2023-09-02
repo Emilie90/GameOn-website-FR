@@ -105,10 +105,20 @@ birthdate.addEventListener("change", function () {
 });
 
 function validBirthdate(inputBirthdate) {
-  if (inputBirthdate.value === " ") {
-    birthData.setAttribute("data-error", "veuillez entrer une date valide");
+  var currentDate = new Date();
+  var birthDate = new Date(inputBirthdate.value);
+  var age = currentDate.getFullYear() - birthDate.getFullYear();
+  console.log(age);
+  if (inputBirthdate.value === "") {
+    birthData.setAttribute(
+      "data-error",
+      "Veuillez entrer une date de naissance valide."
+    );
     birthData.setAttribute("data-error-visible", true);
     return false;
+  } else if (age < 18) {
+    birthData.setAttribute("data-error", "Vous devez avoir plus de 18 ans.");
+    birthData.setAttribute("data-error-visible", true);
   } else {
     birthData.setAttribute("data-error-visible", false);
     return true;
@@ -146,8 +156,6 @@ function validLocation() {
 
 radioBtn.forEach((selectedRadio) => {
   selectedRadio.addEventListener("change", function () {
-    var item = event.target.value;
-    console.log(item);
     validLocation();
   });
 });
