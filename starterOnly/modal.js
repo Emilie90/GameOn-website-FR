@@ -104,11 +104,16 @@ birthdate.addEventListener("change", function () {
   validBirthdate(this);
 });
 
+// calcul age
+
+function getAge(date) {
+  var diff = Date.now() - date.getTime();
+  var age = new Date(diff);
+  return Math.abs(age.getUTCFullYear() - 1970);
+}
+
 function validBirthdate(inputBirthdate) {
-  var currentDate = new Date();
-  var birthDate = new Date(inputBirthdate.value);
-  var age = currentDate.getFullYear() - birthDate.getFullYear();
-  console.log(age);
+  var age = getAge(new Date(inputBirthdate.value));
   if (inputBirthdate.value === "") {
     birthData.setAttribute(
       "data-error",
@@ -117,7 +122,7 @@ function validBirthdate(inputBirthdate) {
     birthData.setAttribute("data-error-visible", true);
     return false;
   } else if (age < 18) {
-    birthData.setAttribute("data-error", "Vous devez avoir plus de 18 ans.");
+    birthData.setAttribute("data-error", "Vous devez avoir 18 ans.");
     birthData.setAttribute("data-error-visible", true);
   } else {
     birthData.setAttribute("data-error-visible", false);
@@ -132,7 +137,11 @@ quantity.addEventListener("change", function () {
 function validQuantity(inputQuantity) {
   if (isNaN(inputQuantity.value) == true || inputQuantity.value === " ") {
     console.log(inputQuantity.value);
-    throw new Error("Une valeur numérique doit être saisie ");
+    quantityData.setAttribute("data-error", "Veuillez entrer un chiffre.");
+    quantityData.setAttribute("data-error-visible", true);
+  } else {
+    quantityData.setAttribute("data-error-visible", false);
+    return true;
   }
 }
 
