@@ -44,10 +44,10 @@ function closeModal() {
 
 //first name validation
 firstName.addEventListener("change", function () {
-  validFirstName(this);
+  validFirstName();
 });
-function validFirstName(inputFirstName) {
-  if (inputFirstName.value.length < 2 || inputFirstName.value === "") {
+function validFirstName() {
+  if (!firstName.validity.valid) {
     firstData.setAttribute(
       "data-error",
       "veuillez entrer au moins 2 caractères pour le prénom"
@@ -61,10 +61,10 @@ function validFirstName(inputFirstName) {
 }
 //last name validation
 lastName.addEventListener("change", function () {
-  validLastName(this);
+  validLastName();
 });
-function validLastName(inputLastName) {
-  if (inputLastName.value.length < 2 || inputLastName.value === "") {
+function validLastName() {
+  if (!lastName.validity.valid) {
     lastData.setAttribute(
       "data-error",
       "veuillez entrer au moins 2 caractères pour le nom"
@@ -124,6 +124,7 @@ function validBirthdate(inputBirthdate) {
   } else if (age < 18) {
     birthData.setAttribute("data-error", "Vous devez avoir 18 ans.");
     birthData.setAttribute("data-error-visible", true);
+    return false;
   } else {
     birthData.setAttribute("data-error-visible", false);
     return true;
@@ -135,10 +136,10 @@ quantity.addEventListener("change", function () {
   validQuantity(this);
 });
 function validQuantity(inputQuantity) {
-  if (isNaN(inputQuantity.value) == true || inputQuantity.value === " ") {
-    console.log(inputQuantity.value);
+  if (inputQuantity.value === "") {
     quantityData.setAttribute("data-error", "Veuillez entrer un chiffre.");
     quantityData.setAttribute("data-error-visible", true);
+    return false;
   } else {
     quantityData.setAttribute("data-error-visible", false);
     return true;
@@ -165,12 +166,12 @@ function validLocation() {
 
 radioBtn.forEach((selectedRadio) => {
   selectedRadio.addEventListener("change", function () {
-    validLocation();
+    validLocation(this);
   });
 });
 
 checkbox1.addEventListener("change", function () {
-  validCheckbox1();
+  validCheckbox1(this);
 });
 
 function validCheckbox1() {
@@ -187,4 +188,20 @@ function validCheckbox1() {
 //submit
 form.addEventListener("submit", function (e) {
   e.preventDefault();
+
+  if (
+    validLastName(form.lastName) &&
+    validFirstName(form.firstName) &&
+    validerEmail(form.email) &&
+    validBirthdate(form.birthdate) &&
+    validQuantity(form.quantity) &&
+    validLocation(form.radioBtn) &&
+    validCheckbox1(form.checkbox1)
+  ) {
+    console.log("Ok");
+    return true;
+  } else {
+    console.log("not ok");
+    return false;
+  }
 });
