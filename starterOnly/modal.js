@@ -27,7 +27,8 @@ const birthData = document.getElementById("birthData");
 const quantityData = document.getElementById("quantityData");
 const radioData = document.getElementById("radioData");
 const checkboxData = document.getElementById("checkboxData");
-
+const successMessage = document.getElementById("successMessage");
+const btnThanks = document.getElementById("btnThanks");
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
@@ -185,6 +186,13 @@ function validCheckbox1() {
   }
 }
 
+//message succes
+function succesMessage() {
+  form.className = "hidden";
+  successMessage.className = "visible";
+}
+btnThanks.addEventListener("click", closeModal);
+
 //submit
 form.addEventListener("submit", function (e) {
   e.preventDefault();
@@ -199,6 +207,7 @@ form.addEventListener("submit", function (e) {
     validCheckbox1(form.checkbox1)
   ) {
     console.log("Ok");
+    succesMessage();
     return true;
   } else {
     console.log("not ok");

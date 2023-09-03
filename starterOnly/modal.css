@@ -228,6 +228,14 @@ input {
 .formData[data-error-visible="true"] .text-control {
   border: 2px solid #e54858;
 }
+.hidden {
+  display: none;
+}
+
+.visible {
+  display: block;
+}
+
 /* 
 input[data-error]::after {
     content: attr(data-error);
