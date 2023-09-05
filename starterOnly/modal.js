@@ -29,6 +29,7 @@ const radioData = document.getElementById("radioData");
 const checkboxData = document.getElementById("checkboxData");
 const successMessage = document.getElementById("successMessage");
 const btnThanks = document.getElementById("btnThanks");
+
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
@@ -37,8 +38,10 @@ function launchModal() {
   modalbg.style.display = "block";
 }
 
-// close modal
+// close modal event
 closeBtn.addEventListener("click", closeModal);
+
+// close modal form
 function closeModal() {
   modalbg.style.display = "none";
   if ((form.className = "hidden")) {
@@ -48,10 +51,12 @@ function closeModal() {
   form.reset();
 }
 
-//first name validation
+//Listen event on first name input
 firstName.addEventListener("change", function () {
   validFirstName();
 });
+
+//Check if First Name is correct (at least 2 letters)
 function validFirstName() {
   if (!firstName.validity.valid) {
     firstData.setAttribute(
@@ -65,10 +70,12 @@ function validFirstName() {
     return true;
   }
 }
-//last name validation
+//Listen event on last name input
 lastName.addEventListener("change", function () {
   validLastName();
 });
+
+//Check if Last Name is correct (at least 2 letters)
 function validLastName() {
   if (!lastName.validity.valid) {
     lastData.setAttribute(
@@ -83,10 +90,12 @@ function validLastName() {
   }
 }
 
-//email validation
+//Listen event on email input
 email.addEventListener("change", function () {
   validerEmail(this);
 });
+
+//Check if email is correct (with RegExp)
 function validerEmail(inputEmail) {
   let emailRegExp = new RegExp(
     "^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$",
@@ -105,7 +114,7 @@ function validerEmail(inputEmail) {
   }
 }
 
-// birthdate validation
+//Listen event on birthdate input
 birthdate.addEventListener("change", function () {
   validBirthdate(this);
 });
@@ -117,7 +126,7 @@ function getAge(date) {
   var age = new Date(diff);
   return Math.abs(age.getUTCFullYear() - 1970);
 }
-
+//check if user's birthdate is correct and if user is over 18
 function validBirthdate(inputBirthdate) {
   var age = getAge(new Date(inputBirthdate.value));
   if (inputBirthdate.value === "") {
@@ -137,10 +146,12 @@ function validBirthdate(inputBirthdate) {
   }
 }
 
-//quantity validation
+//Listen event on quantity input
 quantity.addEventListener("change", function () {
   validQuantity(this);
 });
+
+//check if the input is not empty
 function validQuantity(inputQuantity) {
   if (inputQuantity.value === "") {
     quantityData.setAttribute("data-error", "Veuillez entrer un chiffre.");
@@ -152,7 +163,15 @@ function validQuantity(inputQuantity) {
   }
 }
 
-// Un bouton radio est sélectionné
+//Listen event on location input
+
+radioBtn.forEach((selectedRadio) => {
+  selectedRadio.addEventListener("change", function () {
+    validLocation(this);
+  });
+});
+
+//check if a radio button is selected
 function validLocation() {
   var selected = false;
   for (var radio of radioBtn) {
@@ -169,17 +188,12 @@ function validLocation() {
     return false;
   }
 }
-
-radioBtn.forEach((selectedRadio) => {
-  selectedRadio.addEventListener("change", function () {
-    validLocation(this);
-  });
-});
-
+//Listen event on Term of use checkbox
 checkbox1.addEventListener("change", function () {
   validCheckbox1(this);
 });
 
+//check if term of use's checkbox is checked
 function validCheckbox1() {
   if (checkbox1.checked) {
     checkboxData.setAttribute("data-error-visible", false);
@@ -191,14 +205,15 @@ function validCheckbox1() {
   }
 }
 
-//message succes
+//succes message display === all validation OK
 function succesMessage() {
   form.className = "hidden";
   successMessage.className = "visible";
 }
+//close modal on success message's button
 btnThanks.addEventListener("click", closeModal);
 
-//submit
+//submit form with validation of all input
 form.addEventListener("submit", function (e) {
   e.preventDefault();
 
