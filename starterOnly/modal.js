@@ -41,6 +41,11 @@ function launchModal() {
 closeBtn.addEventListener("click", closeModal);
 function closeModal() {
   modalbg.style.display = "none";
+  if ((form.className = "hidden")) {
+    form.className = "visible";
+    successMessage.className = "hidden";
+  }
+  form.reset();
 }
 
 //first name validation
