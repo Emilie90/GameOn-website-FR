@@ -226,11 +226,9 @@ form.addEventListener("submit", function (e) {
     validLocation(form.radioBtn) &&
     validCheckbox1(form.checkbox1)
   ) {
-    console.log("Ok");
     succesMessage();
     return true;
   } else {
-    console.log("not ok");
     return false;
   }
 });
